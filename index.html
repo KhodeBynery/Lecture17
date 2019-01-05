@@ -1,26 +1,43 @@
 <!DOCTYPE html>
-<html ng-app='BindingApp'>
+<html ng-app='ShoppingListApp'>
   <head>
     <meta charset="utf-8">
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
     <style> body { font-size: 1.2em; }</style>
-    <title>2-way, 1-way, and 1-time binding</title>
+    <title>ng-repeat</title>
   </head>
   <body>
-    <h1>2-way, 1-way, and 1-time binding</h1>
-    <div ng-controller='BindingController'>
+    <h1>ng-repeat</h1>
+    <div ng-controller='ShoppingListController'>
+      <!-- Shopping List #1: -->
+      <h3>Shopping List:</h3>
+      <!-- each time this is iterated, it will output another item equal to one of the items in the shopping lista array -->
+      <!-- <ul>
+        <li ng-repeat="item in shoppingList1">{{ item }}</li>
+      </ul> -->
 
-      <button ng-click="showNumberOfWatchers()">Log # of Watchers</button>
-      <button ng-click="setFullName()">Set Full Name</button><br>
+      <!-- Shopping List #2: -->
+      <!-- each item in the loop is going to represent an object -->
+      <!-- <ul>
+        <li ng-repeat="item in shoppingList2">Buy {{item.quantity}} of
+          {{item.name}}(s)</li>
+      </ul> -->
 
-      Full name is: {{ :: fullName }} <br>
-      <button ng-click="logFirstName()">Log First Name</button><br>
-      <button ng-click="logFullName()">Log Full Name</button><br>
-
-      <div>
-        <input type="text" ng-model="firstName">
-      </div>
+      <!-- Shopping List #3: -->
+      <!-- The input displays the quantity value of the first item on the list, and allows it to be edited -->
+      <input type="text" ng-model="shoppingList2[0].quantity">
+      <ul>
+        <!-- "ng-repeat is similar to the "for each" loop -->
+        <!-- This continuously outputs values in a connected array -->
+        <!-- "$index" counts the number of iterations in the loop. -->
+        <li ng-repeat="item in shoppingList2">{{$index + 1}}. Buy {{item.quantity}} of {{item.name}}(s)</li>
+        <!-- the "(s)" is simply a text value -->
+      </ul>
+        <input type="text" ng-model="newItemName" placeholder="item name">
+        <input type="text" ng-model="newItemQuantity" placeholder="item quantity">
+      <!-- This adds a new item to the list -->
+      <button ng-click="addToList()">Add To List</button>
     </div>
   </body>
 </html>
